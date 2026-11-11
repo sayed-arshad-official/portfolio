@@ -45,7 +45,7 @@
         html {
             scroll-behavior: smooth;
             overflow-x: hidden;
-            scroll-padding-top: 85px; /* FIX: Prevents navbar from covering section titles on click */
+            scroll-padding-top: 85px; 
         }
 
         body {
@@ -54,11 +54,10 @@
             color: var(--text-muted);
             line-height: 1.6;
             overflow-x: hidden;
-            width: 100%; /* FIX: Replaced 100vw to prevent horizontal scrollbars on Windows */
+            width: 100%;
             max-width: 100%;
         }
 
-        /* FIX: Prevents background scrolling when mobile menu is open */
         body.no-scroll {
             overflow: hidden;
         }
@@ -102,7 +101,7 @@
         .delay-3 { transition-delay: 0.3s; }
 
         @media (max-width: 768px) {
-            .delay-1, .delay-2, .delay-3 { transition-delay: 0s; } /* Disable delays on mobile */
+            .delay-1, .delay-2, .delay-3 { transition-delay: 0s; } 
         }
 
         /* ==========================================================================
@@ -120,6 +119,7 @@
             overflow: hidden;
         }
 
+        /* FIX: Rewritten Section Title to prevent mobile overflow clipping */
         .section-title {
             font-size: 2.2rem;
             font-weight: 600;
@@ -127,11 +127,10 @@
             margin-bottom: 3.5rem;
             color: var(--text-main);
             position: relative;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
             letter-spacing: 1px;
             text-transform: uppercase;
+            width: 100%;
+            word-wrap: break-word;
         }
 
         .section-title::after {
@@ -147,7 +146,7 @@
         }
         
         .section-title:hover::after {
-            width: 100%;
+            width: 100px; 
         }
 
         /* ==========================================================================
@@ -303,7 +302,7 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 70px; /* Offset for navbar */
+            padding-top: 70px; 
             background: var(--bg-main);
         }
 
@@ -663,7 +662,7 @@
             font-weight: 500;
             font-size: 1rem;
             text-decoration: none;
-            word-break: break-word; /* Forces long emails to wrap on mobile */
+            word-break: break-word; 
             transition: var(--transition);
         }
         
@@ -724,12 +723,12 @@
                 padding: 70px 0;
             }
 
+            /* FIX: Further reduced font size to ensure it fits mobile screens perfectly */
             .section-title {
-                font-size: 1.8rem;
+                font-size: 1.6rem; 
                 margin-bottom: 2.5rem;
             }
 
-            /* FIX: Robust Mobile Slide-In Menu */
             .nav-menu {
                 position: fixed;
                 top: 70px;
@@ -742,7 +741,7 @@
                 align-items: center;
                 gap: 2rem;
                 transform: translateX(100%);
-                visibility: hidden; /* FIX: Prevents focus stealing when closed */
+                visibility: hidden; 
                 transition: transform 0.4s ease-in-out, visibility 0.4s;
             }
             
@@ -761,7 +760,6 @@
                 display: block;
             }
 
-            /* Typography Scaling */
             .hero-content h1 {
                 font-size: 2.4rem;
             }
@@ -770,7 +768,6 @@
                 font-size: 1.1rem;
             }
 
-            /* Mobile Buttons */
             .hero-buttons {
                 flex-direction: column;
                 width: 100%;
@@ -782,16 +779,13 @@
                 width: 100%;
             }
 
-            /* Prevent shadows from breaking layout */
             .profile-image img { box-shadow: 10px 10px 0px var(--beige); }
             .about-image img { box-shadow: -10px -10px 0px var(--cream); }
 
-            /* Grid Fixes */
             .about-stats {
                 grid-template-columns: 1fr;
             }
             
-            /* Timeline Fixes */
             .timeline::before {
                 left: 15px;
             }
@@ -822,7 +816,6 @@
                 <li><a href="#family">Family Legacy</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
-            <!-- FIX: Added Accessibility aria-label -->
             <button class="hamburger" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
@@ -876,7 +869,6 @@
                     </div>
                 </div>
                 <div class="about-image reveal delay-2">
-                    <!-- FIX: Added lazy loading to off-screen images -->
                     <img src="arshad1.jpg" alt="Sayed Arshad" loading="lazy">
                 </div>
             </div>
@@ -954,7 +946,6 @@
             <h2 class="section-title reveal">Family Legacy</h2>
             <div class="family-content">
                 <div class="family-image reveal delay-1">
-                    <!-- FIX: Added lazy loading to off-screen images -->
                     <img src="saslogo.jpg" alt="SAS Construction Logo" loading="lazy">
                 </div>
                 <div class="family-text reveal delay-2">
@@ -986,7 +977,6 @@
                     <h3 class="reveal">Ready to collaborate?</h3>
                     <p class="reveal delay-1">Whether it's coding projects, business ideas, or expanding the family empire - I'm all ears!</p>
                     <div class="contact-details">
-                        <!-- FIX: Converted Text into fully clickable Mail/Tel Links -->
                         <div class="contact-item reveal delay-1">
                             <i class="fas fa-envelope"></i>
                             <a href="mailto:sayedarshadmail@gmail.com">sayedarshadmail@gmail.com</a>
@@ -995,7 +985,6 @@
                             <i class="fas fa-phone"></i>
                             <a href="tel:+919078125825">+91 907812 5825</a>
                         </div>
-                        <!-- FIX: Added secure rel="noopener noreferrer" for external links -->
                         <div class="contact-item reveal delay-3">
                             <i class="fab fa-instagram"></i>
                             <a href="https://instagram.com/sayed_arshad_5825" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">@sayed_arshad_5825</a>
@@ -1018,17 +1007,14 @@
     </footer>
 
     <script>
-        // Hamburger Menu Toggle & Body Scroll Lock
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
         const body = document.querySelector('body');
 
-        // Toggle menu when hamburger is clicked
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
             
-            // FIX: Safely apply no-scroll class to body
             if(navMenu.classList.contains('active')) {
                 body.classList.add('no-scroll');
             } else {
@@ -1036,16 +1022,14 @@
             }
         });
 
-        // Close menu when a link is clicked
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
-                body.classList.remove('no-scroll'); // FIX: Reset body scrolling
+                body.classList.remove('no-scroll'); 
             });
         });
 
-        // Navbar Drop Shadow on Scroll
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 10) {
@@ -1055,7 +1039,6 @@
             }
         });
 
-        // Robust Scroll Reveal Animation for Mobile & Desktop
         const revealElements = document.querySelectorAll('.reveal');
         
         const revealOptions = {
