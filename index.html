@@ -28,7 +28,6 @@
             --glass-bg: rgba(254, 244, 227, 0.90);
             --shadow-subtle: 0 15px 35px rgba(0, 0, 0, 0.05);
             --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.08);
-            /* Upgraded bezier curve for buttery smooth interactions */
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
         }
 
@@ -41,7 +40,6 @@
             box-sizing: border-box;
         }
 
-        /* Moved smooth scrolling here for better performance */
         html {
             scroll-behavior: smooth;
         }
@@ -52,6 +50,7 @@
             color: var(--text-muted);
             line-height: 1.7;
             overflow-x: hidden;
+            width: 100%;
         }
 
         h1, h2, h3, h4, h5, h6 {
@@ -130,7 +129,7 @@
         }
 
         /* ==========================================================================
-           Navigation (Light Luxe Header)
+           Navigation
            ========================================================================== */
         .navbar {
             position: fixed;
@@ -146,7 +145,7 @@
 
         .navbar.scrolled {
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-            padding: 0.5rem 0; /* Shrinks slightly on scroll */
+            padding: 0.2rem 0; 
         }
 
         .nav-container {
@@ -186,7 +185,6 @@
             position: relative;
         }
 
-        /* Smooth underline hover effect for nav links */
         .nav-menu a::after {
             content: '';
             position: absolute;
@@ -210,7 +208,7 @@
         .hamburger {
             display: none;
             cursor: pointer;
-            z-index: 1001; /* Keep above mobile menu */
+            z-index: 1001; 
         }
 
         .hamburger span {
@@ -239,7 +237,9 @@
            Buttons
            ========================================================================== */
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             padding: 0.85rem 2.5rem;
             border-radius: 4px; 
             font-weight: 600;
@@ -724,6 +724,7 @@
             border-radius: 50%;
             font-size: 1.2rem;
             transition: var(--transition);
+            flex-shrink: 0; /* Prevents icon from shrinking on mobile */
         }
         
         .contact-item:hover i {
@@ -737,6 +738,7 @@
             font-size: 1.05rem;
             text-decoration: none;
             transition: var(--transition);
+            word-break: break-word; /* Prevents long emails from overflowing */
         }
         
         .contact-item a:hover {
@@ -749,7 +751,7 @@
         .footer {
             background: var(--black);
             text-align: center;
-            padding: 3rem 0;
+            padding: 3rem 2rem;
         }
 
         .footer p {
@@ -760,7 +762,7 @@
         }
 
         /* ==========================================================================
-           Responsive Design (Media Queries)
+           Responsive Design - TABLETS (max-width: 992px)
            ========================================================================== */
         @media (max-width: 992px) {
             .hero-container, .about-content, .family-content {
@@ -769,13 +771,16 @@
                 gap: 3rem;
             }
             
+            .hero-content p {
+                margin: 0 auto 2.5rem auto; /* Center paragraph text */
+            }
+
             .hero-buttons {
                 justify-content: center;
             }
             
             .profile-image, .about-image {
-                margin: 0 auto;
-                margin-top: 1rem;
+                margin: 1rem auto 0 auto;
             }
             
             .about-image { max-width: 500px; }
@@ -784,26 +789,78 @@
                 left: 50%;
                 transform: translateX(-50%);
             }
-            
-            .contact-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-                padding: 2rem;
-            }
         }
 
+        /* ==========================================================================
+           Responsive Design - MOBILE PHONES (max-width: 768px)
+           ========================================================================== */
         @media (max-width: 768px) {
+            /* Tighter Spacing */
             section {
                 padding: 80px 0;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2.5rem;
+            }
+
+            /* Typography Scaling */
+            .hero-content h1 {
+                font-size: 2.6rem;
+            }
+            
+            .hero-content h2 {
+                font-size: 1.1rem;
+            }
+
+            /* Touch-Friendly Mobile Buttons */
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+                width: 100%;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            /* Adjust Decorative Shadows to Prevent Overflow */
+            .profile-image img {
+                box-shadow: 12px 12px 0px var(--beige);
+            }
+            .about-image img {
+                box-shadow: -12px -12px 0px var(--cream);
+            }
+            .profile-image img:hover {
+                transform: translate(-4px, -4px);
+                box-shadow: 16px 16px 0px var(--accent);
+            }
+            .about-image:hover img {
+                transform: translate(4px, 4px);
+                box-shadow: -16px -16px 0px var(--accent);
+            }
+
+            /* Adjust Grid for Stats */
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
             /* Smooth Slide-in Mobile Menu */
             .nav-menu {
                 position: fixed;
                 top: 0;
-                right: -100%; /* Start off-screen */
+                right: -100%;
                 width: 75%;
+                max-width: 300px;
                 height: 100vh;
                 background: var(--glass-bg);
                 backdrop-filter: blur(20px);
@@ -811,7 +868,7 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
-                gap: 3rem;
+                gap: 2.5rem;
                 transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
                 box-shadow: -10px 0 30px rgba(0,0,0,0.1);
             }
@@ -822,30 +879,51 @@
             
             .nav-menu a {
                 font-size: 1.2rem;
+                padding: 10px; /* Bigger touch target */
             }
             
             .hamburger {
                 display: block;
             }
             
-            .hero-content h1 {
-                font-size: 2.8rem;
-            }
-            
-            .about-stats {
-                grid-template-columns: 1fr;
-            }
-            
+            /* Fix Timeline Alignment for Mobile */
             .timeline::before {
-                left: 20px;
+                left: 15px; /* Shift line closer to edge */
             }
             .timeline-item {
-                padding-left: 50px;
+                padding-left: 50px; /* Adjust spacing */
             }
             .timeline-icon {
-                left: 0;
-                width: 40px;
-                height: 40px;
+                left: -3px; /* Center icon over shifted line */
+                width: 38px;
+                height: 38px;
+            }
+            .timeline-content {
+                padding: 1.8rem 1.5rem;
+            }
+
+            /* Adjust Contact Items */
+            .contact-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding: 2rem 1.5rem;
+            }
+            
+            /* Adjust Quote Block */
+            blockquote {
+                padding: 1.5rem 1rem;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Extra small devices (phones below 480px width) */
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .family-text h3 {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -1064,11 +1142,13 @@
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+            
             // Prevent scrolling when menu is open on mobile
             if(navMenu.classList.contains('active')) {
                 body.style.overflow = 'hidden';
             } else {
                 body.style.overflow = 'auto';
+                body.style.overflowX = 'hidden'; // Restore original state
             }
         });
 
@@ -1078,6 +1158,7 @@
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
                 body.style.overflow = 'auto';
+                body.style.overflowX = 'hidden';
             });
         });
 
